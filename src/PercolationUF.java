@@ -21,10 +21,13 @@ public class PercolationUF implements IPercolate{
      * @return true if (row, col) on grid, false otherwise
      */
     protected boolean inBounds(int row, int col) {
-        if (row < 0 || row >= myGrid.length) {
+        if (row < 0 || row >= myGrid.length){
             return false;
         }
-        return col >= 0 && col < myGrid[0].length;
+        if (col < 0 || col >= myGrid[0].length){
+            return false;
+        }
+        return true;
     }
 
     /**
