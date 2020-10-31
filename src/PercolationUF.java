@@ -5,7 +5,7 @@ public class PercolationUF implements IPercolate{
     private final int VTOP;
     private final int VBOTTOM;
 
-    public PercolationUF (int size, IUnionFind finder) {
+    public PercolationUF (IUnionFind finder, int size) {
         myGrid = new boolean[size][size];
         myFinder = finder;
         myFinder.initialize((size * size + 2) );
