@@ -23,8 +23,7 @@ public class PercolationDFS implements IPercolate {
 	/**
 	 * Initialize a grid so that all cells are blocked.
 	 * 
-	 * @param n
-	 *            is the size of the simulated (square) grid
+	 * @param n is the size of the simulated (square) grid
 	 */
 	public PercolationDFS(int n) {
 		myGrid = new int[n][n];
@@ -92,10 +91,8 @@ public class PercolationDFS implements IPercolate {
 	 * Private helper method to mark all cells that are open and reachable from
 	 * (row,col).
 	 * 
-	 * @param row
-	 *            is the row coordinate of the cell being checked/marked
-	 * @param col
-	 *            is the col coordinate of the cell being checked/marked
+	 * @param row is the row coordinate of the cell being checked/marked
+	 * @param col is the col coordinate of the cell being checked/marked
 	 */
 	protected void dfs(int row, int col) {
 		// out of bounds?

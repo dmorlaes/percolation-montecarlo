@@ -14,12 +14,6 @@ public class PercolationUF implements IPercolate{
         myOpenCount = 0;
     }
 
-    /**
-     * Determine if (row, col) is valid for given grid
-     * @param row specifies row
-     * @param col specifies column
-     * @return true if (row, col) on grid, false otherwise
-     */
     protected boolean inBounds(int row, int col) {
         if (row < 0 || row >= myGrid.length){
             return false;
@@ -30,23 +24,10 @@ public class PercolationUF implements IPercolate{
         return true;
     }
 
-    /**
-     *
-     * @param row row index
-     * @param col column index
-     * @param size size of myGrid
-     * @return index of the specified row and column coordinates in grid
-     */
     public int getIndex(int row, int col, int size) {
         return row*size + col;
     }
 
-
-    /**
-     * Open the site at the specified row and index coordinates
-     * @param row row index
-     * @param col column index
-     */
     @Override
     public void open(int row, int col) {
         if(!inBounds(row, col)) {
@@ -63,7 +44,6 @@ public class PercolationUF implements IPercolate{
         if(inBounds(row, col - 1) && isOpen(row, col - 1)){
             myFinder.union(index, getIndex(row, col - 1, myGrid.length));
         }
-
 
         if(inBounds(row, col + 1) && isOpen(row, col + 1)) {
             myFinder.union(index, getIndex(row, col + 1, myGrid.length));
@@ -86,11 +66,6 @@ public class PercolationUF implements IPercolate{
         }
     }
 
-    /**
-     * Returns true if site specified by the row and column coordinates is open
-     * @param row row index
-     * @param col column index
-     */
     @Override
     public boolean isOpen(int row, int col) {
         if(!inBounds(row, col)) {
@@ -99,11 +74,6 @@ public class PercolationUF implements IPercolate{
         return myGrid[row][col];
     }
 
-    /**
-     * Returns true if site specified by the row and column coordinates is full
-     * @param row row index
-     * @param col column index
-     */
     @Override
     public boolean isFull(int row, int col) {
         if(!inBounds(row, col)) {
@@ -112,17 +82,11 @@ public class PercolationUF implements IPercolate{
         return myFinder.connected(getIndex(row, col, myGrid.length), VTOP);
     }
 
-    /**
-     * Returns true if the system percolates (there is some sort of open, connected path from top to bottom)
-     */
     @Override
     public boolean percolates() {
         return myFinder.connected(VTOP, VBOTTOM);
     }
-
-    /**
-     * Returns the number of sites that are open
-     */
+    
     @Override
     public int numberOfOpenSites() {
         return myOpenCount;
