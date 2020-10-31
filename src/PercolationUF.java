@@ -21,9 +21,10 @@ public class PercolationUF implements IPercolate{
      * @return true if (row, col) on grid, false otherwise
      */
     protected boolean inBounds(int row, int col) {
-        if (row < 0 || row >= myGrid.length) return false;
-        if (col < 0 || col >= myGrid[0].length) return false;
-        return true;
+        if (row < 0 || row >= myGrid.length) {
+            return false;
+        }
+        return col >= 0 && col < myGrid[0].length;
     }
 
     /**
@@ -45,33 +46,43 @@ public class PercolationUF implements IPercolate{
      */
     @Override
     public void open(int row, int col) {
-        if(!inBounds(row, col))
-        {
+        if(!inBounds(row, col)) {
             throw new IndexOutOfBoundsException(
                     String.format("(%d,%d) not in bounds", row,col));
         }
         int index = getIndex(row, col, myGrid.length);
-        if(myGrid[row][col]) return;
+        if(myGrid[row][col]){
+            return;
+        }
 
         myGrid[row][col] = true;
         myOpenCount++;
 
-        if(inBounds(row, col - 1) && isOpen(row, col - 1))
+        if(inBounds(row, col - 1) && isOpen(row, col - 1)){
             myFinder.union(index, getIndex(row, col - 1, myGrid.length));
+        }
 
-        if(inBounds(row, col + 1) && isOpen(row, col + 1))
+
+        if(inBounds(row, col + 1) && isOpen(row, col + 1)) {
             myFinder.union(index, getIndex(row, col + 1, myGrid.length));
+        }
 
-        if(inBounds(row - 1, col) && isOpen(row - 1, col))
+        if(inBounds(row - 1, col) && isOpen(row - 1, col)) {
             myFinder.union(index, getIndex(row - 1, col, myGrid.length));
+        }
 
-        if(inBounds(row + 1, col) && isOpen(row + 1, col))
+        if(inBounds(row + 1, col) && isOpen(row + 1, col)) {
             myFinder.union(index, getIndex(row + 1, col, myGrid.length));
+        }
 
 
-        if(row == 0) myFinder.union(index, VTOP);
+        if(row == 0) {
+            myFinder.union(index, VTOP);
+        }
 
-        if(row == myGrid.length - 1) myFinder.union(index, VBOTTOM);
+        if(row == myGrid.length - 1) {
+            myFinder.union(index, VBOTTOM);
+        }
     }
 
     /**
