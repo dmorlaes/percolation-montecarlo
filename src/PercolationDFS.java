@@ -35,11 +35,12 @@ public class PercolationDFS implements IPercolate {
 	public void open(int row, int col) {
 		
 		if (! inBounds(row,col)) {
-			throw new IndexOutOfBoundsException(
-					String.format("(%d,%d) not in bounds", row,col));
+			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row, col));
 		}
-		if (myGrid[row][col] != BLOCKED)
+
+		if (myGrid[row][col] != BLOCKED) {
 			return;
+		}
 		myOpenCount += 1;
 		myGrid[row][col] = OPEN;
 		updateOnOpen(row,col);
@@ -48,8 +49,7 @@ public class PercolationDFS implements IPercolate {
 	public boolean isOpen(int row, int col) {
 		
 		if (! inBounds(row,col)) {
-			throw new IndexOutOfBoundsException(
-					String.format("(%d,%d) not in bounds", row,col));
+			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row, col));
 		}
 		return myGrid[row][col] != BLOCKED;
 	}
@@ -57,8 +57,7 @@ public class PercolationDFS implements IPercolate {
 	public boolean isFull(int row, int col) {
 		
 		if (! inBounds(row,col)) {
-			throw new IndexOutOfBoundsException(
-					String.format("(%d,%d) not in bounds", row,col));
+			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row, col));
 		}
 		
 		return myGrid[row][col] == FULL;
@@ -95,12 +94,14 @@ public class PercolationDFS implements IPercolate {
 	 * @param col is the col coordinate of the cell being checked/marked
 	 */
 	protected void dfs(int row, int col) {
-		// out of bounds?
-		if (! inBounds(row,col)) return;
-		
-		// full or NOT open, don't process
-		if (isFull(row, col) || !isOpen(row, col))
+
+		if (! inBounds(row,col)){
 			return;
+		}
+
+		if (isFull(row, col) || !isOpen(row, col)) {
+			return;
+		}
 		
 		myGrid[row][col] = FULL;
 		dfs(row - 1, col);
@@ -120,9 +121,10 @@ public class PercolationDFS implements IPercolate {
 	 * @return true if (row,col) on grid, false otherwise
 	 */
 	protected boolean inBounds(int row, int col) {
-		if (row < 0 || row >= myGrid.length) return false;
-		if (col < 0 || col >= myGrid[0].length) return false;
-		return true;
+		if (row < 0 || row >= myGrid.length){
+			return false;
+		}
+		return col >= 0 && col < myGrid[0].length;
 	}
 
 }

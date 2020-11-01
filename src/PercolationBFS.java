@@ -4,14 +4,10 @@ import java.util.*;
 
 public class PercolationBFS extends PercolationDFSFast{
 
-    /**
-     * Initialize a grid so that all cells are blocked.
-     *
-     * @param x is the size of the simulated (square) grid
-     */
     public PercolationBFS(int x) {
         super(x);
     }
+
     @Override
     protected void dfs(int row, int col) {
         if (!inBounds(row,col)) return;
