@@ -18,10 +18,7 @@ public class PercolationUF implements IPercolate{
         if (row < 0 || row >= myGrid.length){
             return false;
         }
-        if (col < 0 || col >= myGrid[0].length){
-            return false;
-        }
-        return true;
+        return col >= 0 && col < myGrid[0].length;
     }
 
     public int getIndex(int row, int col, int size) {
@@ -86,7 +83,7 @@ public class PercolationUF implements IPercolate{
     public boolean percolates() {
         return myFinder.connected(VTOP, VBOTTOM);
     }
-    
+
     @Override
     public int numberOfOpenSites() {
         return myOpenCount;
